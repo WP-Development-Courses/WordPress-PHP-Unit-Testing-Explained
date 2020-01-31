@@ -21,13 +21,12 @@ define( 'WP_DEBUG', true );
 /*
  * Database settings.
  */
-
-define( 'DB_NAME', 'byline_tests' );
-define( 'DB_USER', 'root' );
-define( 'DB_PASSWORD', 'root' );
-define( 'DB_HOST', 'localhost' );
-define( 'DB_CHARSET', 'utf8' );
-define( 'DB_COLLATE', '' );
+define( 'DB_NAME'       , getenv( 'WP_DB_NAME' ) ?: 'byline_tests' );
+define( 'DB_USER'       , getenv( 'WP_DB_USER' ) ?: 'root' );
+define( 'DB_PASSWORD'   , getenv( 'WP_DB_PASS' ) ?: '' );
+define( 'DB_HOST'       , 'localhost' );
+define( 'DB_CHARSET'    , 'utf8' );
+define( 'DB_COLLATE'    , '' );
 
 /*
  * Authentication Unique Keys and Salts.
