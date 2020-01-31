@@ -9,7 +9,7 @@ env:
   global:
     - WP_DB_USER=wp
     - WP_DB_PASS=password
-    - WP_DB_NAME=wp_tests
+    - WP_DB_NAME=byline_tests
 
 before_install: composer validate --strict
 
