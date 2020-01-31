@@ -8,7 +8,7 @@ class Test_Get_Byline extends WP_UnitTestCase {
 		);
 	}
 
-	public function test_passing_in_array_returns_empty_string() {
+	public function test_returns_empty_string_with_invalid_argument() {
 		$this->assertSame(
 			'',
 			get_byline( [] )
