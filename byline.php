@@ -12,5 +12,9 @@ Version: 1.0.0
  * @return string Post byline.
  */
 function get_byline( $author_name ) {
+	if ( ! is_string( $author_name ) ) {
+		return '';
+	}
+
 	return 'Written by ' . $author_name;
 }

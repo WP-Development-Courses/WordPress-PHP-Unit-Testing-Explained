@@ -7,4 +7,11 @@ class Test_Get_Byline extends WP_UnitTestCase {
 			get_byline( 'John Smith' )
 		);
 	}
+
+	public function test_returns_empty_string_with_invalid_argument() {
+		$this->assertSame(
+			'',
+			get_byline( array() )
+		);
+	}
 }
