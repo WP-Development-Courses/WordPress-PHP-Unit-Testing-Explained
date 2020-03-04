@@ -2,6 +2,23 @@
 
 class Test_Exercise_Assertions_Solution extends WP_UnitTestCase {
 	/**
+	 * Verify that `wp_list_categories()` handles highlighting the current category correctly.
+	 */
+	public function test_wp_list_categories_class_containing_current_cat() {
+		$category_1_id = self::factory()->category->create();
+		$category_2_id = self::factory()->category->create();
+
+		$category_list = wp_list_categories( [
+			'hide_empty'       => false,
+			'echo'             => false,
+			'current_category' => $category_2_id,
+		] );
+
+		$this->assertNotRegExp( '/class="[^"]*cat-item-' . $category_1_id . '[^"]*current-cat[^"]*"/', $category_list );
+		$this->assertRegExp( '/class="[^"]*cat-item-' . $category_2_id . '[^"]*current-cat[^"]*"/', $category_list );
+	}
+
+	/**
 	 * Verify that `get_comment_count()` returns the right values if there is one approved comment.
 	 */
 	public function test_get_comment_count_approved() {
