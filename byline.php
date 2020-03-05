@@ -35,3 +35,20 @@ function get_byline_for_user_id( $author_id ) {
 
 	return get_byline( $author_object->display_name );
 }
+
+/**
+ * Output the post byline for a post id.
+ *
+ * @param int $post_id Id of the post to output the byline for.
+ *
+ * @return string Post byline.
+ */
+function get_byline_for_post_id( $post_id ) {
+	$post = get_post( $post_id );
+
+	if ( ! $post instanceof WP_Post ) {
+		return '';
+	}
+
+	return get_byline_for_user_id( $post->post_author );
+}
