@@ -7,7 +7,6 @@ class Test_Exercise_Assertions extends WP_UnitTestCase {
 	public function test_get_comment_count_approved() {
 		// Create an approved comment.
 		// There is no need to store the id in a variable, as we are not using it in the assertion.
-		self::factory()->comment->create();
 
 		$count = get_comment_count();
 
