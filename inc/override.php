@@ -27,6 +27,14 @@ function byline_save_override_meta_data( $post_id ) {
 		return false;
 	}
 
+	if ( $_POST['byline-override'] === '' ) {
+		if ( get_post_meta( $post_id, 'byline-override', true ) ) {
+			return delete_post_meta( $post_id, 'byline-override' );
+		}
+
+		return false;
+	}
+
 	return update_post_meta(
 		$post_id,
 		'byline-override',
