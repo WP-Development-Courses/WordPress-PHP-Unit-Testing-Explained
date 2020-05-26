@@ -20,11 +20,16 @@ function byline_output_override_meta_box( $post ) {
 		id="byline-override"
 	/>
 	<?php
+	wp_nonce_field( 'byline-override', 'byline-override-nonce' );
 }
 
 function byline_save_override_meta_data( $post_id ) {
 	if ( ! isset( $_POST['byline-override'] ) ) {
 		return false;
+	}
+
+	if ( ! isset( $_POST['byline-override-nonce'] ) || ! wp_verify_nonce( $_POST['byline-override-nonce'], 'byline-override' ) ) {
+		return;
 	}
 
 	if ( $_POST['byline-override'] === '' ) {

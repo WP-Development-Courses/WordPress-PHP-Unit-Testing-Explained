@@ -17,6 +17,7 @@ class Test_Byline_Override_Solution extends WP_UnitTestCase {
 	 * Verify that a custom Byline in $_POST is saved to post meta.
 	 */
 	function test_custom_byline_is_saved() {
+		$_POST['byline-override-nonce'] = wp_create_nonce( 'byline-override' );
 		$_POST['byline-override'] = 'A custom byline';
 
 		$return = byline_save_override_meta_data( self::$post_id );
@@ -36,6 +37,7 @@ class Test_Byline_Override_Solution extends WP_UnitTestCase {
 	function test_custom_byline_updated() {
 		add_post_meta( self::$post_id, 'byline-override', 'Existing Byline' );
 
+		$_POST['byline-override-nonce'] = wp_create_nonce( 'byline-override' );
 		$_POST['byline-override'] = 'New Byline';
 
 		$return = byline_save_override_meta_data( self::$post_id );
@@ -54,6 +56,7 @@ class Test_Byline_Override_Solution extends WP_UnitTestCase {
 	function test_custom_byline_is_deleted() {
 		add_post_meta( self::$post_id, 'byline-override', 'Existing Byline' );
 
+		$_POST['byline-override-nonce'] = wp_create_nonce( 'byline-override' );
 		$_POST['byline-override'] = '';
 
 		$return = byline_save_override_meta_data( self::$post_id );
