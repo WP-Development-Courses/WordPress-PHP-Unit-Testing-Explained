@@ -25,26 +25,6 @@ class The_Byline_Test extends WP_UnitTestCase {
 		] );
 	}
 
-    function test_default_args_first_page() {
-       $this->go_to( get_permalink( self::$post_id ) );
-	    setup_postdata( get_post( self::$post_id ) );
-
-       $this->assertSame(
-       	    'Written by John Doe',
-	       get_echo( 'the_byline' )
-       );
-    }
-
-	function test_default_args_second_page() {
-		$this->go_to( get_permalink( self::$post_id ) . '&page=2' );
-		setup_postdata( get_post( self::$post_id ) );
-
-		$this->assertSame(
-			'Written by John Doe',
-			get_echo( 'the_byline' )
-		);
-	}
-
 	function test_hide_on_paged_first_page() {
 		$this->go_to( get_permalink( self::$post_id ) );
 		setup_postdata( get_post( self::$post_id ) );
