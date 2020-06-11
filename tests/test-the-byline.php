@@ -26,9 +26,6 @@ class The_Byline_Test extends WP_UnitTestCase {
 	}
 
 	function test_hide_on_paged_first_page() {
-		$this->go_to( get_permalink( self::$post_id ) );
-		setup_postdata( self::$post_id );
-
 		$this->assertSame(
 			'Written by John Doe',
 			get_echo( 'the_byline', [ [ 'hide_on_paged' => true ] ] )
@@ -36,9 +33,6 @@ class The_Byline_Test extends WP_UnitTestCase {
 	}
 
 	function test_hide_on_paged_second_page() {
-		$this->go_to( get_permalink( self::$post_id ) . '&page=2' );
-		setup_postdata( self::$post_id );
-
 		$this->assertSame(
 			'',
 			get_echo( 'the_byline', [ [ 'hide_on_paged' => true ] ] )
