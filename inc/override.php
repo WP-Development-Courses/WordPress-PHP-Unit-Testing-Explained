@@ -29,7 +29,7 @@ function byline_save_override_meta_data( $post_id ) {
 	}
 
 	if ( ! isset( $_POST['byline-override-nonce'] ) || ! wp_verify_nonce( $_POST['byline-override-nonce'], 'byline-override' ) ) {
-		return;
+		return false;
 	}
 
 	if ( $_POST['byline-override'] === '' ) {
