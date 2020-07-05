@@ -20,4 +20,31 @@ class Test_Exercise_Solution extends WP_UnitTestCase {
 
 	    $this->assertContains( "category-$category_id", get_body_class() );
     }
+
+	/**
+	 * Validate `get_comments_pages_count()` for posts with no comments.
+	 */
+	function test_get_comments_no_comments() {
+		$post_id = self::factory()->post->create(
+			array(
+				'post_title' => 'comment--post',
+				'post_type'  => 'post',
+			)
+		);
+
+		$this->go_to( get_permalink( $post_id ) );
+
+		global $wp_query;
+		unset( $wp_query->comments );
+
+		$comments = get_comments( array( 'post_id' => $post_id ) );
+
+		$this->assertEquals( 0, get_comment_pages_count( $comments, 10, false ) );
+		$this->assertEquals( 0, get_comment_pages_count( $comments, 1, false ) );
+		$this->assertEquals( 0, get_comment_pages_count( $comments, 0, false ) );
+		$this->assertEquals( 0, get_comment_pages_count( $comments, 10, true ) );
+		$this->assertEquals( 0, get_comment_pages_count( $comments, 5 ) );
+		$this->assertEquals( 0, get_comment_pages_count( $comments ) );
+		$this->assertequals( 0, get_comment_pages_count( null, 1 ) );
+	}
 }
