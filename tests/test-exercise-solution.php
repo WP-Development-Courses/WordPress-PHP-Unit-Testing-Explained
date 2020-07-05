@@ -90,4 +90,22 @@ class Test_Exercise_Solution extends WP_UnitTestCase {
 
 		$this->assertTrue( is_home() );
 	}
+
+	/**
+	 * Verify that `wp_get_document_title()` works on blog archive pages.
+	 */
+	function test_wp_get_document_title_on_paged() {
+		self::factory()->post->create_many( 2 );
+		update_option( 'posts_per_page', 1 );
+
+		$this->go_to( home_url( '/page/2' ) );
+
+		$this->assertEquals(
+			sprintf( '%s &#8211; Page 2 &#8211; %s',
+				get_option( 'blogname'),
+				get_option( 'blogdescription' )
+			),
+			wp_get_document_title()
+		);
+	}
 }
