@@ -47,4 +47,35 @@ class Test_Exercise_Solution extends WP_UnitTestCase {
 		$this->assertEquals( 0, get_comment_pages_count( $comments ) );
 		$this->assertequals( 0, get_comment_pages_count( null, 1 ) );
 	}
+
+	/**
+	 * Ensure that `wp_trim_excerpt()` works correctly when used in secondary Loop.
+	 */
+	public function test_wp_trim_excerpt_secondary_loop_respect_more() {
+		$post1 = self::factory()->post->create(
+			array(
+				'post_content' => 'Post 1 Page 1<!--more-->Post 1 Page 2',
+			)
+		);
+		$post2 = self::factory()->post->create(
+			array(
+				'post_content' => 'Post 2 Page 1<!--more-->Post 2 Page 2',
+			)
+		);
+
+		$this->go_to( get_permalink( $post1 ) );
+		setup_postdata( get_post( $post1 ) );
+
+		$q = new WP_Query(
+			array(
+				'post__in' => array( $post2 ),
+			)
+		);
+		if ( $q->have_posts() ) {
+			while ( $q->have_posts() ) {
+				$q->the_post();
+				$this->assertSame( 'Post 2 Page 1', wp_trim_excerpt() );
+			}
+		}
+	}
 }
