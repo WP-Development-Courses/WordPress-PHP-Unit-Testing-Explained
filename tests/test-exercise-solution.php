@@ -92,12 +92,13 @@ class Test_Exercise_Solution extends WP_UnitTestCase {
 	/**
 	 * Ensure that `is_home()` returns true when the Home URL has no trailing slash.
 	 */
-	public function test_go_to_should_go_to_home_page_when_passing_the_untrailingslashed_home_url() {
-		$this->assertFalse( is_home() );
+	public function test_is_home_returns_true_for_untrailingslashed_home_url() {
 		$home = untrailingslashit( get_option( 'home' ) );
 
+		// Use `go_to()` to simulate a request to the Home URL, i.e. the `$home` variable.
 		$this->go_to( $home );
 
+		// Verify that `is_home()` returns true, even if the URL has no trailing slash.
 		$this->assertTrue( is_home() );
 	}
 
