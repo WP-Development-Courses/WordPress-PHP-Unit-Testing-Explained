@@ -32,21 +32,17 @@ class Test_Exercise_Solution extends WP_UnitTestCase {
 	/**
 	 * Validate `get_comments_pages_count()` for posts with no comments.
 	 */
-	function test_get_comments_no_comments() {
-		$post_id = self::factory()->post->create(
-			array(
-				'post_title' => 'comment--post',
-				'post_type'  => 'post',
-			)
-		);
+	function test_get_comment_pages_count_no_comments() {
+		// Create a post fixture.
+		$post_id = self::factory()->post->create();
 
+		// Use `go_to()` to simulate a request to single post page.
 		$this->go_to( get_permalink( $post_id ) );
 
-		global $wp_query;
-		unset( $wp_query->comments );
-
+		// Get comments.
 		$comments = get_comments( array( 'post_id' => $post_id ) );
 
+		// Assert that the number of total comment pages is always 0.
 		$this->assertEquals( 0, get_comment_pages_count( $comments, 10, false ) );
 		$this->assertEquals( 0, get_comment_pages_count( $comments, 1, false ) );
 		$this->assertEquals( 0, get_comment_pages_count( $comments, 0, false ) );
