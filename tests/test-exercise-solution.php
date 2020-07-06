@@ -103,14 +103,19 @@ class Test_Exercise_Solution extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Verify that `wp_get_document_title()` works on blog archive pages.
+	 * Verify that `wp_get_document_title()` displays the right page number on blog archive pages.
 	 */
 	function test_wp_get_document_title_on_paged() {
+		// Create two posts.
 		self::factory()->post->create_many( 2 );
+		// Display a single post per page, so that we have two pages of posts.
 		update_option( 'posts_per_page', 1 );
 
+		// Use `go_to()` to simulate a request to second page of the blog archive, i.e.
+		// `http://example.org/page/2/`.
 		$this->go_to( home_url( '/page/2' ) );
 
+		// Verify that the title contains the right page number.
 		$this->assertEquals(
 			sprintf( '%s &#8211; Page 2 &#8211; %s',
 				get_option( 'blogname'),
