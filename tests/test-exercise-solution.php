@@ -23,7 +23,7 @@ class Test_Exercise_Solution extends WP_UnitTestCase {
 
 	    // Use `go_to()` to simulate a request to the `foo` category archive page, i.e.
 		// `http://example.org/category/foo/`.
-	    $this->go_to( home_url( '/category/foo/' ) );
+	    $this->go_to( get_term_link( $category_id, 'category' ) );
 
 	    // Assert that `get_body_class()` contains `category-{$id}`.
 	    $this->assertContains( "category-$category_id", get_body_class() );
