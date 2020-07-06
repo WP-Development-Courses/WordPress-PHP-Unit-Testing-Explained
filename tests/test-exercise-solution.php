@@ -10,14 +10,22 @@ class Test_Exercise_Solution extends WP_UnitTestCase {
 		create_initial_taxonomies();
 	}
 
+	/**
+	 * Verify that `get_body_class()` contains `category-{$id}` on category archive pages.
+	 */
 	function test_category_page_body_class() {
 		$this->set_permalink_structure( '/%year%/%monthnum%/%day%/%postname%/' );
 
+		// Create a category fixture.
 	    $category_id = self::factory()->category->create( array( 'name' => 'foo' ) );
+	    // Create a post fixture with the category fixture assigned.
 	    self::factory()->post->create( array( 'category' => $category_id ) );
 
+	    // Use `go_to()` to simulate a request to the `foo` category archive page, i.e.
+		// `http://example.org/category/foo/`.
 	    $this->go_to( home_url( '/category/foo/' ) );
 
+	    // Assert that `get_body_class()` contains `category-{$id}`.
 	    $this->assertContains( "category-$category_id", get_body_class() );
     }
 
