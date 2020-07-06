@@ -56,31 +56,37 @@ class Test_Exercise_Solution extends WP_UnitTestCase {
 	 * Ensure that `wp_trim_excerpt()` works correctly when used in secondary Loop.
 	 */
 	public function test_wp_trim_excerpt_secondary_loop_respect_more() {
+		// Create a first post fixture with two pages.
 		$post1 = self::factory()->post->create(
 			array(
 				'post_content' => 'Post 1 Page 1<!--more-->Post 1 Page 2',
 			)
 		);
+		// Create a second post fixture with two pages.
 		$post2 = self::factory()->post->create(
 			array(
 				'post_content' => 'Post 2 Page 1<!--more-->Post 2 Page 2',
 			)
 		);
 
+		// Use `go_to()` to simulate a request to single post page of the first post fixture ($post1).
 		$this->go_to( get_permalink( $post1 ) );
-		setup_postdata( get_post( $post1 ) );
+		// Use `setup_postdata()` to setup the post globals for the first post fixture ($post1).
+		setup_postdata( $post1 );
 
-		$q = new WP_Query(
+		// Create a secondary loop querying for the second post fixture ($post2).
+		$query = new WP_Query(
 			array(
 				'post__in' => array( $post2 ),
 			)
 		);
-		if ( $q->have_posts() ) {
-			while ( $q->have_posts() ) {
-				$q->the_post();
-				$this->assertSame( 'Post 2 Page 1', wp_trim_excerpt() );
-			}
-		}
+
+		// Setup the post globals for the second post fixture ($post2).
+		$query->the_post();
+
+		// Verify that `wp_trim_excerpt()` shows the excerpt of the correct current post, i.e.
+		// the post from the secondary loop.
+		$this->assertSame( 'Post 2 Page 1', wp_trim_excerpt() );
 	}
 
 	/**
