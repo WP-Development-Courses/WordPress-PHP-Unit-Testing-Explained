@@ -74,6 +74,10 @@ class Test_Exercise_Solution extends WP_UnitTestCase {
 		// Use `setup_postdata()` to setup the post globals for the first post fixture ($post1).
 		setup_postdata( $post1 );
 
+		// Verify that `wp_trim_excerpt()` shows the excerpt of the correct current post, i.e.
+		// the post from the global post data.
+		$this->assertSame( 'Post 1 Page 1', wp_trim_excerpt() );
+
 		// Create a secondary loop querying for the second post fixture ($post2).
 		$query = new WP_Query(
 			array(
