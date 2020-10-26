@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "roots/wordpress",
-            "version": "5.3.2",
+            "version": "5.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WordPress/WordPress.git",
-                "reference": "5.3.2"
+                "reference": "5.5.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WordPress/WordPress/zipball/5.3.2",
-                "reference": "5.3.2"
+                "url": "https://api.github.com/repos/WordPress/WordPress/zipball/5.5.1",
+                "reference": "5.5.1"
             },
             "require": {
                 "php": ">=5.3.2",
@@ -41,7 +41,7 @@
                 "cms",
                 "wordpress"
             ],
-            "time": "2019-12-18T22:19:57+00:00"
+            "time": "2020-09-01T18:56:09+00:00"
         },
         {
             "name": "roots/wordpress-core-installer",
@@ -771,6 +771,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2019-09-17T06:23:10+00:00"
         },
         {
@@ -1571,16 +1572,16 @@
         },
         {
             "name": "wp-phpunit/wp-phpunit",
-            "version": "5.3.2",
+            "version": "5.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-phpunit/wp-phpunit.git",
-                "reference": "e52333e5f31108e14bd9fdb5dc73846ec0410012"
+                "reference": "763121e752594664c150643e05c991a0acf3800a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-phpunit/wp-phpunit/zipball/e52333e5f31108e14bd9fdb5dc73846ec0410012",
-                "reference": "e52333e5f31108e14bd9fdb5dc73846ec0410012",
+                "url": "https://api.github.com/repos/wp-phpunit/wp-phpunit/zipball/763121e752594664c150643e05c991a0acf3800a",
+                "reference": "763121e752594664c150643e05c991a0acf3800a",
                 "shasum": ""
             },
             "type": "library",
@@ -1610,7 +1611,7 @@
                 "test",
                 "wordpress"
             ],
-            "time": "2019-12-13T13:23:00+00:00"
+            "time": "2020-09-02T15:53:50+00:00"
         }
     ],
     "aliases": [],
